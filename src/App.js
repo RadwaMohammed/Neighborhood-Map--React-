@@ -8,7 +8,6 @@ class App extends React.Component {
     locations : []
   }
   componentDidMount() {
-    this.loadMapScript();
     this.getLocations();
   }
 
@@ -18,6 +17,17 @@ class App extends React.Component {
       // location of Alexanderia city in Egypt
       center: {lat: 31.2000924, lng: 29.9187387},
       zoom: 12
+    });
+
+    this.state.locations.map(location => {
+      let marker = new window.google.maps.Marker({
+        position: {
+          lat: location.venue.location.lat,
+          lng: location.venue.location.lng
+        },
+        map: map,
+        title: location.venue.name
+      });
     });
   }
   /* loading map script */
@@ -57,14 +67,14 @@ class App extends React.Component {
     .then(response => {
       this.setState({
         locations: response.data.response.groups[0].items
-      });
+      }, this.loadMapScript());
     })
     .catch(error => {
         // hande error of fetching data
         alert('An error has occurred while fetching data!');
         console.log(`Error:  ${error}`);
-      });
-    }
+    });
+  }
 
   render() {
     return (
