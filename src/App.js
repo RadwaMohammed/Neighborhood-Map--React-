@@ -5,7 +5,8 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-    locations : []
+    locations : [],
+    markers: []
   }
   componentDidMount() {
     this.getLocations();
@@ -14,12 +15,14 @@ class App extends React.Component {
   /* initialize google Map  */
   initMap = () => {
     let map = new window.google.maps.Map(document.getElementById('map'), {
-      // location of Alexanderia city in Egypt
-      center: {lat: 31.2000924, lng: 29.9187387},
-      zoom: 12
+      // location of cairo city in Egypt
+      center: {lat: 30.06263, lng: 31.24967},
+      zoom: 14
     });
-
-    this.state.locations.map(location => {
+    // Create InfoWindow for mrkers
+    let infowindow = new window.google.maps.InfoWindow();
+    let markers = this.state.locations.map(location => {
+      let markerContent = `${location.venue.name}`;
       let marker = new window.google.maps.Marker({
         position: {
           lat: location.venue.location.lat,
@@ -28,8 +31,19 @@ class App extends React.Component {
         map: map,
         title: location.venue.name
       });
+      // add eeventlistener when click on a marker
+      marker.addListener('click', function() {
+      // set the content of infowindow
+      infowindow.setContent(markerContent);
+      // open the infowindow
+      infowindow.open(map, marker);
+
+      });
+      return marker;
     });
+    this.setState({markers: markers});
   }
+
   /* loading map script */
   loadMapScript = () => {
     window.initMap = this.initMap;
@@ -58,10 +72,11 @@ class App extends React.Component {
     const parameters = {
       client_id : 'TJ4M30ICUWSOT45033WN5QMJBBA0YUOD2RBTS1RW2H4LN24F',
       client_secret: 'J30MQOQUA425OIXPCFFZDDDZLE03KADG44AZCSL0B05AWQLP',
-      query: 'hotel',
-      ll: '31.2000924,29.9187387',
+      section: 'coffee',
+      query: 'coffee',
+      ll: '30.06263, 31.24967',
       v: '20190429',
-      limit:'15'
+      limit:'10'
     }
     axios.get(endPoint + new URLSearchParams(parameters))
     .then(response => {
