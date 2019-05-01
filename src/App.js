@@ -2,7 +2,9 @@
 import axios from 'axios'
 import React from 'react';
 import './App.css';
+// import components
 import MyMap from './components/mymap/MyMap';
+import SideBar from './components/sidebar/SideBar';
 
 
 class App extends React.Component {
@@ -86,6 +88,7 @@ class App extends React.Component {
       this.setState({
         locations: response.data.response.groups[0].items
       }, this.loadMapScript());
+
     })
     .catch(error => {
         // hande error of fetching data
@@ -95,10 +98,13 @@ class App extends React.Component {
   }
 
   render() {
+    const{ markers, locations } = this.state;
+
     return (
       <div className="app">
         <main>
           <MyMap />
+          <SideBar markers={markers} locations={locations}  />
         </main>
       </div>
 
