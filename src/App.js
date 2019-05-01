@@ -2,6 +2,8 @@
 import axios from 'axios'
 import React from 'react';
 import './App.css';
+import MyMap from './components/mymap/MyMap';
+
 
 class App extends React.Component {
   state = {
@@ -67,6 +69,7 @@ class App extends React.Component {
    * https://github.com/axios/axios
    *
   */
+
   getLocations = () => {
     const endPoint = 'https://api.foursquare.com/v2/venues/explore?';
     const parameters = {
@@ -93,9 +96,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <main>
-        <div id="map"></div>
-      </main>
+      <div className="app">
+        <main>
+          <MyMap />
+        </main>
+      </div>
 
     )
   }
