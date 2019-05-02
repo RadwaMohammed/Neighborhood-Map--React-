@@ -6,7 +6,7 @@ import './App.css';
 import MyMap from './components/mymap/MyMap';
 import SideBar from './components/sidebar/SideBar';
 import Header from './components/header/Header';
-
+import Footer from './components/footer/Footer';
 
 class App extends React.Component {
   state = {
@@ -108,8 +108,8 @@ class App extends React.Component {
           <SideBar markers={markers} locations={locations}  />
           <MyMap />
         </main>
+        <Footer />
       </div>
-
     )
   }
 
