@@ -8,7 +8,7 @@ class SearchResults extends Component {
     const list = ( places.length > 0) ? places : locations;
 
     return (
-      <div>
+      <div className="result-container">
         {
           (places.length === 0 && query.length > 0)
           ?(

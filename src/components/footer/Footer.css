@@ -1,0 +1,11 @@
+footer{
+	height: 3em;
+    color: #eee;
+    text-align: center;
+    line-height: 3em;
+    font-size: 0.8rem;
+
+}
+footer a {
+	color:#fff;
+}

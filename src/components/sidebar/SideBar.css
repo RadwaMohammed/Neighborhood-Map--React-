@@ -1,0 +1,62 @@
+aside {
+	width: 40%;
+	background-color: rgba(34, 34, 34, 0.9);
+	height: 50em;
+	position: absolute;
+	z-index: 100;
+	left:0;
+	transition: all 1s ease-in-out;
+}
+.toggle{
+   left: -1000px;
+}
+.search-container {
+	margin: 1em;
+
+}
+.search-label {
+	font-size: 1.2rem;
+	color:#aaa;
+
+}
+#search {
+	width: 90%;
+	height: 1.5em;
+	border: 1px solid #777;
+    background-color: #ccc;
+	display: block;
+	margin: 1em auto;
+	padding: 0.5em;
+	font-size: 1rem;
+	color:#333;
+}
+
+@media all and (max-width: 768px) and (min-width: 426px)   {
+    aside {
+        left: -1000px;
+        width: 71%;
+    }
+    aside.toggle {
+        left: 0
+    }
+}
+@media all and (max-width: 425px) and (min-width: 376px) {
+    aside {
+        left: -1000px;
+        width: 85%;
+    }
+    aside.toggle {
+    	left: 0
+    }
+
+
+}
+@media all and (max-width: 375px){
+	aside {
+        left: -1000px;
+        width: 92%;
+    }
+    aside.toggle {
+    	left: 0
+    }
+}

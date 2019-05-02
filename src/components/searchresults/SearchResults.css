@@ -1,0 +1,31 @@
+.result-container{
+	text-align: center;
+	margin: 1em auto;
+	font-size: 0.86rem;
+}
+.result-container ul{
+	list-style: none;
+
+
+}
+.place{
+	width:90%;
+	height:2em;
+	padding:0.3em;
+	border:1px solid #555;
+	margin: 0.8em;
+	line-height: 2rem;
+	cursor: pointer;
+	background-color: #333;
+	color:#bbb;
+}
+.place:hover{
+	background-color: #222;
+}
+@media all and (max-width: 425px) {
+    .place{
+    	font-size: 0.82rem;
+    }
+
+
+}

@@ -1,0 +1,50 @@
+header {
+    display: flex;
+    height: 4em;
+    align-items: center;
+    justify-content: center;
+
+}
+.toggle-btn-container {
+    width: 30%;
+    text-align: right;
+}
+.toggle-btn {
+    font-size: 2rem;
+    padding: 5px;
+    cursor: pointer;
+    color:#888;
+    border:1px solid #777;
+    border-radius: 5px;
+}
+.toggle-btn:hover {
+    color:#ccc;
+    border:1px solid #888;
+}
+.page-header {
+    font-size: 1.4rem;
+    width:70%;
+    text-align: center;
+}
+@media all and (max-width: 768px) {
+    .page-header {
+        font-size: 1.2rem;
+        width:85%;
+        text-align: center;
+    }
+    .toggle-btn-container {
+        text-align: center;
+        width: 15%;
+    }
+}
+@media all and (max-width: 375px){
+    .page-header {
+        font-size: 1rem;
+        width:80%;
+        text-align: center;
+    }
+    .toggle-btn-container {
+        text-align: center;
+        width: 20%;
+    }
+}
