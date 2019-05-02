@@ -5,6 +5,7 @@ import './App.css';
 // import components
 import MyMap from './components/mymap/MyMap';
 import SideBar from './components/sidebar/SideBar';
+import Header from './components/header/Header';
 
 
 class App extends React.Component {
@@ -19,8 +20,8 @@ class App extends React.Component {
   /* initialize google Map  */
   initMap = () => {
     let map = new window.google.maps.Map(document.getElementById('map'), {
-      // location of cairo city in Egypt
-      center: {lat: 30.06263, lng: 31.24967},
+      // location of Alexandria city in Egypt
+      center: {lat: 31.205753, lng: 29.924526},
       zoom: 14
     });
     // Create InfoWindow for mrkers
@@ -77,11 +78,11 @@ class App extends React.Component {
     const parameters = {
       client_id : 'TJ4M30ICUWSOT45033WN5QMJBBA0YUOD2RBTS1RW2H4LN24F',
       client_secret: 'J30MQOQUA425OIXPCFFZDDDZLE03KADG44AZCSL0B05AWQLP',
-      section: 'coffee',
-      query: 'coffee',
-      ll: '30.06263, 31.24967',
+      section:'outdoors',
+      query:'outdoors',
+      ll: '31.205753,29.924526',
       v: '20190429',
-      limit:'10'
+      limit: '10'
     }
     axios.get(endPoint + new URLSearchParams(parameters))
     .then(response => {
@@ -102,9 +103,10 @@ class App extends React.Component {
 
     return (
       <div className="app">
+        <Header />
         <main>
-          <MyMap />
           <SideBar markers={markers} locations={locations}  />
+          <MyMap />
         </main>
       </div>
 

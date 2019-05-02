@@ -4,15 +4,16 @@ import './SearchResults.css';
 class SearchResults extends Component {
 
   render() {
-    const { locations, query, places } = this.props;
+    const { locations, query, places} = this.props;
     const list = ( places.length > 0) ? places : locations;
+
     return (
       <div>
         {
           (places.length === 0 && query.length > 0)
           ?(
               <p className="no-result">
-                There is no coffee shop with that name!!
+                There is no place with that name!!
               </p>
             )
           :(
