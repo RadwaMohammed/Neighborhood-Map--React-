@@ -18,4 +18,21 @@ main {
   display: flex;
   min-height: calc(100vh - 7em);
 }
-
+/* infowindow */
+.info-header{
+  color:#811411;
+  font-size: 1.2rem;
+  text-align: center;
+  padding:0.6em;
+  border-bottom: 0.1em dotted #811411;
+  background-color: #eee;
+}
+.info-title {
+  color:#811411;
+  font-weight: bold;
+}
+.info-detail {
+  color:#222;
+  font-size: 1.1em;
+  margin:0.5em 0;
+}
