@@ -1,3 +1,4 @@
+import escapeRegExp from 'escape-string-regexp';
 // Import axios
 import axios from 'axios'
 import React from 'react';
@@ -11,7 +12,8 @@ import Footer from './components/footer/Footer';
 class App extends React.Component {
   state = {
     locations : [],
-    markers: []
+    query:'',
+    places: []
   }
   componentDidMount() {
     this.getLocations();
@@ -24,9 +26,10 @@ class App extends React.Component {
       center: {lat: 31.205753, lng: 29.924526},
       zoom: 14
     });
+    this.markers=[];
     // Create InfoWindow for mrkers
     let infowindow = new window.google.maps.InfoWindow();
-    let markers = this.state.locations.map(location => {
+    this.state.locations.forEach(location => {
       let markerContent = `${location.venue.name}`;
       let marker = new window.google.maps.Marker({
         position: {
@@ -34,19 +37,28 @@ class App extends React.Component {
           lng: location.venue.location.lng
         },
         map: map,
-        title: location.venue.name
+        title: location.venue.name,
+        animation: window.google.maps.Animation.DROP
       });
       // add eeventlistener when click on a marker
       marker.addListener('click', function() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+      }
+      setTimeout(()=>{marker.setAnimation(null)}, 500);
       // set the content of infowindow
       infowindow.setContent(markerContent);
       // open the infowindow
       infowindow.open(map, marker);
 
       });
-      return marker;
+
+      this.markers.push(marker);
     });
-    this.setState({markers: markers});
+
+
   }
 
   /* loading map script */
@@ -98,14 +110,55 @@ class App extends React.Component {
     });
   }
 
+
+
+
+  searchPlaces = (query) => {
+
+    const allPlaces = this.state.locations;
+    let searchedResults;
+    this.setState({ query: query }, ()=>{
+      if(query && query.length > 0) {
+        const match = new RegExp(escapeRegExp(query), 'i')
+        searchedResults = this.state.locations.filter(
+          (location) => match.test(location.venue.name)
+        );
+
+      this.markers.forEach(
+          (marker) => {
+            match.test(marker.title)
+            ? marker.setVisible(true)
+            : marker.setVisible(false);
+          });
+
+        this.setState({places: searchedResults});
+      } else {
+        this.markers.forEach(
+          (marker) => {
+
+            marker.setVisible(true)
+
+          });
+        this.setState({places: allPlaces});
+      }
+    })
+  }
+
+
   render() {
-    const{ markers, locations } = this.state;
+        const{ markers, locations, places, query} = this.state;
 
     return (
       <div className="app">
         <Header />
         <main>
-          <SideBar markers={markers} locations={locations}  />
+          <SideBar
+            markers={markers}
+            locations={locations}
+            searchPlaces={this.searchPlaces}
+            query={query}
+            places={places}
+            />
           <MyMap />
         </main>
         <Footer />
