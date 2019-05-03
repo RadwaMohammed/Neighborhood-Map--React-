@@ -82,6 +82,10 @@ class App extends React.Component {
       this.markers.push(marker);
     });
     this.setState({markers:this.markers});
+    // global function to handle authentication errors for google map
+    window.gm_authFailure = function() {
+      alert('Google maps failed to load!');
+    }
 
   }
 
@@ -99,7 +103,6 @@ class App extends React.Component {
     script.onerror = function() {
       alert('Oh no, There is an error occurred during loading map!');
     };
-
     index.parentNode.insertBefore(script, index);
   }
 
@@ -129,7 +132,7 @@ class App extends React.Component {
     })
     .catch(error => {
         // hande error of fetching data
-        alert('An error has occurred while fetching data!');
+        alert('An error has occurred while fetching data of the places!');
         console.log(`Error:  ${error}`);
     });
   }
