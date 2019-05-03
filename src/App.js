@@ -56,19 +56,27 @@ class App extends React.Component {
         title: location.venue.name,
         animation: window.google.maps.Animation.DROP
       });
+
       // add eeventlistener when click on a marker
       marker.addListener('click', function() {
-      if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-      } else {
-        marker.setAnimation(window.google.maps.Animation.BOUNCE);
-      }
-      setTimeout(()=>{marker.setAnimation(null)}, 500);
-      // set the content of infowindow
-      infowindow.setContent(markerContent);
-      // open the infowindow
-      infowindow.open(map, marker);
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        }
+        setTimeout(()=>{marker.setAnimation(null)}, 700);
+        // set the content of infowindow
+        infowindow.setContent(markerContent);
+        // open the infowindow
+        infowindow.open(map, marker);
+      });
 
+      /* fix the problem when click on a marker and infowindow
+      * window is opend and start searching about another place
+      * the infowindow still opened while marker is hidden
+      */
+      marker.addListener('visible_changed', function() {
+        infowindow.close();
       });
 
       this.markers.push(marker);
