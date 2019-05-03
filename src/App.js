@@ -25,7 +25,7 @@ class App extends React.Component {
     let map = new window.google.maps.Map(document.getElementById('map'), {
       // location of Alexandria city in Egypt
       center: {lat: 31.205753, lng: 29.924526},
-      zoom: 14
+      zoom: 15
     });
     this.markers=[];
     // Create InfoWindow for mrkers
@@ -120,8 +120,8 @@ class App extends React.Component {
       section:'outdoors',
       query:'outdoors',
       ll: '31.205753,29.924526',
-      v: '20190429',
-      limit: '10'
+      v: '20190429'
+
     }
     axios.get(endPoint + new URLSearchParams(parameters))
     .then(response => {

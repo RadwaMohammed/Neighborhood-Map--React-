@@ -1,11 +1,16 @@
 footer{
-	height: 3em;
-    color: #eee;
+	height: 2.5em;
+    color: #fff;
     text-align: center;
-    line-height: 3em;
-    font-size: 0.8rem;
-
+    line-height: 2.5em;
+    font-size: 0.9rem;
+    background-color: #000;
 }
+
 footer a {
-	color:#fff;
+	color: #fff;
+}
+
+footer p {
+	margin: 0;
 }

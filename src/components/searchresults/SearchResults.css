@@ -1,31 +1,42 @@
 .result-container{
 	text-align: center;
-	margin: 1em auto;
-	font-size: 0.86rem;
+	font-size: 0.9rem;
+	overflow: auto;
+	padding: 0.7em;
 }
+
 .result-container ul{
 	list-style: none;
-
+	margin: 0;
+	padding: 0;
 
 }
-.place{
-	width:90%;
-	height:2em;
-	padding:0.3em;
-	border:1px solid #555;
-	margin: 0.8em;
-	line-height: 2rem;
+
+.place {
+	height: auto;
+    display: block;
+    margin: 0.7em;
+    cursor: pointer;
+    background-color: #222;
+    color: #fff;
+    line-height: 3em;
+    padding: 0.2em;
+
+}
+
+.place:hover {
+	background-color: #000;
 	cursor: pointer;
-	background-color: #333;
-	color:#bbb;
 }
-.place:hover{
-	background-color: #222;
+
+.no-result {
+	color:#000;
 }
-@media all and (max-width: 425px) {
-    .place{
-    	font-size: 0.82rem;
-    }
 
 
+/* Media Query for Responsiveness*/
+@media all and (max-width: 925px) and (min-width: 769px) {
+	.result-container {
+		font-size: 0.85rem;
+	}
 }

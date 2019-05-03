@@ -12,7 +12,9 @@ class SideBar extends Component {
     return (
       <aside>
         <div className="search-container">
-          <label htmlFor="search" className="search-label">Search for a coffee shop</label>
+          <label htmlFor="search" className="search-label">
+            Search for an outdoor place
+          </label>
             <input
               type="text"
               id="search"

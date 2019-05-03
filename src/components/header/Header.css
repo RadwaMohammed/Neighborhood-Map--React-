@@ -1,50 +1,75 @@
 header {
     display: flex;
-    height: 4em;
+    height: 3.6em;
     align-items: center;
     justify-content: center;
-
+    background-color: #000;
 }
+
 .toggle-btn-container {
-    width: 30%;
+    width: 35%;
     text-align: right;
 }
+
 .toggle-btn {
-    font-size: 2rem;
-    padding: 5px;
+    font-size: 1.2rem;
+    padding: 0.313em;
     cursor: pointer;
-    color:#888;
-    border:1px solid #777;
-    border-radius: 5px;
+    color: #d00600;
+    border: 0.04em solid #d00600;
+    border-radius: 0.313em;
 }
+
 .toggle-btn:hover {
-    color:#ccc;
-    border:1px solid #888;
+    background-color: #080808;
+    color: #960400;
+    border: 0.04em solid #960400;
 }
+
 .page-header {
-    font-size: 1.4rem;
-    width:70%;
+    font-size: 1.2rem;
+    width: 65%;
     text-align: center;
+    font-weight: 400;
 }
-@media all and (max-width: 768px) {
+
+
+/* Media Query for Responsiveness*/
+@media all and (max-width: 768px) and (min-width: 426px) {
     .page-header {
-        font-size: 1.2rem;
         width:85%;
-        text-align: center;
     }
+
     .toggle-btn-container {
         text-align: center;
         width: 15%;
     }
 }
-@media all and (max-width: 375px){
+
+
+@media all and (max-width: 425px) and (min-width: 376px) {
     .page-header {
         font-size: 1rem;
-        width:80%;
-        text-align: center;
+        width: 80%;
     }
+
     .toggle-btn-container {
-        text-align: center;
         width: 20%;
+    }
+}
+
+
+@media all and (max-width: 375px) {
+    .page-header {
+        font-size: 1rem;
+        width: 85%;
+    }
+
+    .toggle-btn-container {
+        width: 15%;
+    }
+
+    .toggle-btn {
+        font-size: 1.1rem;
     }
 }
