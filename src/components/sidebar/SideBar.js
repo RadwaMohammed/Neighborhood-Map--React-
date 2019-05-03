@@ -8,7 +8,7 @@ class SideBar extends Component {
 
 
   render() {
-    const{ locations, query, places, searchPlaces } = this.props;
+    const{ locations, query, places, searchPlaces, markers } = this.props;
     return (
       <aside>
         <div className="search-container">
@@ -26,6 +26,7 @@ class SideBar extends Component {
             places={places}
             query={query}
             locations={locations}
+            markers={markers}
           />
         </div>
       </aside>

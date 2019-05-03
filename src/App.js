@@ -13,7 +13,8 @@ class App extends React.Component {
   state = {
     locations : [],
     query:'',
-    places: []
+    places: [],
+    markers:[]
   }
   componentDidMount() {
     this.getLocations();
@@ -57,7 +58,7 @@ class App extends React.Component {
 
       this.markers.push(marker);
     });
-
+    this.setState({markers:this.markers});
 
   }
 
@@ -146,14 +147,14 @@ class App extends React.Component {
 
 
   render() {
-        const{ markers, locations, places, query} = this.state;
+        const{ locations, places, query} = this.state;
 
     return (
       <div className="app">
         <Header />
         <main>
           <SideBar
-            markers={markers}
+            markers={this.state.markers}
             locations={locations}
             searchPlaces={this.searchPlaces}
             query={query}
