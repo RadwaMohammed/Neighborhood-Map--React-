@@ -82,10 +82,7 @@ class App extends React.Component {
           <h3 class="info-header">${location.venue.name}</h2>
           <p class="info-detail">
             <span class="info-title">Address:</span>
-            ${location.venue.location.formattedAddress[0]} -
-            ${location.venue.location.formattedAddress[1]} -
-            ${location.venue.location.formattedAddress[2]} -
-            ${location.venue.location.formattedAddress[3]}.
+            ${this.getAddress(location)}
           </p>
           <p class="info-detail">
             <span class="info-title">lat:</span>
@@ -94,6 +91,7 @@ class App extends React.Component {
             ${location.venue.location.lng}
           </p>
       </div>`;
+
 
       /* add eventlistener when click on a marker
        * it animate and open infowindow contain data about that location
@@ -153,6 +151,20 @@ class App extends React.Component {
     };
     // make script of map be first script in the page
     index.parentNode.insertBefore(script, index);
+  }
+
+
+  /* get address of a place for the infowindow data
+   * handle the issue of unavailable address in the data fetched from foursquare api
+  */
+  getAddress=(place)=>{
+    let address = place.venue.location.address
+    ? place.venue.location.address
+    : 'Sorry, address is not available.';
+    let city = place.venue.location.address && place.venue.location.city
+    ? ` - ${place.venue.location.city}.`
+    : '';
+    return `${address}${city}`;
   }
 
 
