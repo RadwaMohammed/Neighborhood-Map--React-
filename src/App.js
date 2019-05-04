@@ -175,7 +175,8 @@ class App extends React.Component {
     const allPlaces = this.state.locations;
     let searchedResults;
     this.setState({ query: query }, () => {
-      if(query && query.length > 0) {
+      // make sure the user type and text not only white space
+      if(query && query.length > 0 && query.trim().length !== 0) {
         const match = new RegExp(escapeRegExp(query), 'i')
         searchedResults = this.state.locations.filter(
           (location) => match.test(location.venue.name)
