@@ -20,7 +20,9 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getLocations();
+
   }
+
 
 toggleVisibility =(visible)=>{
   this.setState({isHidden:visible});
@@ -157,6 +159,7 @@ toggleVisibility =(visible)=>{
     };
     // make script of map be first script in the page
     index.parentNode.insertBefore(script, index);
+
   }
 
 
@@ -206,7 +209,6 @@ toggleVisibility =(visible)=>{
       }
     });
   }
-
 
   render() {
     const{ locations, places, query, isHidden} = this.state;

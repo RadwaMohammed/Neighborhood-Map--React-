@@ -12,7 +12,7 @@ footer a {
 }
 footer a:hover,
 footer a:focus {
-	color:#d00600;
+	color: #d00600;
 	cursor: pointer;
 }
 

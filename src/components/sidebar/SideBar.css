@@ -1,11 +1,13 @@
 aside {
-	width: 42%;
+    width: 42%;
     background-color: #fff;
     min-height: calc(100vh - 6.5em);
+    -webkit-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
     transition: all 1s ease-in-out;
-	position: absolute;
-	z-index: 100;
-	left: 0;
+    position: absolute;
+    z-index: 100;
+    left: 0;
     overflow: auto;
     border-bottom: 0.2em solid #d00600;
     border-top: 0.2em solid #d00600;
@@ -18,25 +20,25 @@ aside {
 }
 
 .search-container {
-	padding: 2em 0.7em 0.1em;
+    padding: 2em 0.7em 0.1em;
     text-align: center;
 }
 
 .search-header {
-	font-size: 1.1rem;
-	color: #d00600;
+    font-size: 1.1rem;
+    color: #d00600;
 }
 
 #search {
-	width: 90%;
-	height: 1.5em;
-	border: 0.03em solid #d00600;
+    width: 90%;
+    height: 1.5em;
+    border: 0.03em solid #d00600;
     background-color: #eee;
-	display: block;
-	margin: 1em auto;
-	padding: 0.5em;
-	font-size: 1rem;
-	color: #000;
+    display: block;
+    margin: 1em auto;
+    padding: 0.5em;
+    font-size: 1rem;
+    color: #000;
 }
 
 
@@ -59,18 +61,18 @@ aside {
     }
 
     aside.toggle {
-    	left: 0;
+        left: 0;
     }
 }
 
 
 @media all and (max-width: 375px){
-	aside {
+    aside {
         left: -1000px;
         width: 95%;
     }
 
     aside.toggle {
-    	left: 0;
+        left: 0;
     }
 }
