@@ -10,7 +10,7 @@ class SideBar extends Component {
   render() {
     const{ locations, query, places, searchPlaces, markers } = this.props;
     return (
-      <aside>
+      <aside role="complementary">
         <div className="search-container">
           <label htmlFor="search" className="search-label">
             Search for an outdoor place
@@ -18,6 +18,7 @@ class SideBar extends Component {
             <input
               type="text"
               id="search"
+              role="search"
               placeholder="Type here... "
               value={query}
               onChange={(event) => searchPlaces(event.target.value)}

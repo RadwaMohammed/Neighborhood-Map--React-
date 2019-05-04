@@ -4,10 +4,10 @@ import './Footer.css';
 class Footer extends Component {
 render() {
     return (
-      <footer>
+      <footer role="contentinfo">
         <p>
-			Data from <a href="https://developer.foursquare.com/">
-			Foursquare API</a>.
+			Powered by <a href="https://developer.foursquare.com/">
+			Foursquare API</a> and <a href="https://cloud.google.com/maps-platform/">Google Maps </a>.
         </p>
       </footer>
     )

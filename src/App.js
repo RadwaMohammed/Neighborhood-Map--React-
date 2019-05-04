@@ -32,20 +32,22 @@ class App extends React.Component {
     let infowindow = new window.google.maps.InfoWindow();
     this.state.locations.forEach(location => {
       let markerContent =
-        `<h2 class="info-header">${location.venue.name}</h2>
-        <p class="info-detail">
-          <span class="info-title">Address:</span>
-          ${location.venue.location.formattedAddress[0]} -
-          ${location.venue.location.formattedAddress[1]} -
-          ${location.venue.location.formattedAddress[2]} -
-          ${location.venue.location.formattedAddress[3]}.
-        </p>
-        <p class="info-detail">
-          <span class="info-title">lat:</span>
-          ${location.venue.location.lat},
-          <span class="info-title"> lng:</span>
-          ${location.venue.location.lng}
-        </p>`;
+        `<div aria-label="information window about ${location.venue.name}">
+          <h2 class="info-header">${location.venue.name}</h2>
+          <p class="info-detail">
+            <span class="info-title">Address:</span>
+            ${location.venue.location.formattedAddress[0]} -
+            ${location.venue.location.formattedAddress[1]} -
+            ${location.venue.location.formattedAddress[2]} -
+            ${location.venue.location.formattedAddress[3]}.
+          </p>
+          <p class="info-detail">
+            <span class="info-title">lat:</span>
+            ${location.venue.location.lat},
+            <span class="info-title"> lng:</span>
+            ${location.venue.location.lng}
+          </p>
+        </div>`;
 
       let marker = new window.google.maps.Marker({
         position: {

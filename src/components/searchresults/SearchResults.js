@@ -27,9 +27,11 @@ class SearchResults extends Component {
               {list.map((listItem, index) => {
                 return (
                   <li
+                    role="button"
                     key={index}
                     className="place"
                     onClick={() => this.triggerMarker(listItem.venue.name)}
+                    arial-label={`click to go to loction of ${listItem.venue.name}`}
                   >
                     {listItem.venue.name}
 

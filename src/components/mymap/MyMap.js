@@ -4,7 +4,7 @@ import './MyMap.css';
 function MyMap () {
 
   return (
-      <div id="map"></div>
+      <div id="map" role="application"></div>
   )
 }
 

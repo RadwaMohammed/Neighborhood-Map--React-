@@ -7,9 +7,9 @@ class Header extends Component {
     }
 render() {
     return (
-      <header>
+      <header role="banner">
         <div className="toggle-btn-container">
-          <span className="toggle-btn fas fa-bars" onClick={this.toggleSideBar}></span>
+          <span className="toggle-btn fas fa-bars" onClick={this.toggleSideBar} role="button" aria-label="click here to hide or show search places list"></span>
           </div>
         <h1 className="page-header">Outdoor places in Alexandria, Egypt</h1>
       </header>
