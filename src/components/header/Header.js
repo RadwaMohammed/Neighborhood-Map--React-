@@ -1,25 +1,37 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import './Header.css';
 
-function Header() {
+function Header(props) {
+  const { toggleVisibility, isHidden } = props;
   // hide and show sidebar that contain search part
   function toggleSideBar() {
-    document.querySelector('aside').classList.toggle('toggle');
+    let sideBar =document.querySelector('aside');
+    sideBar.classList.toggle('toggle');
+
+    sideBar.classList.contains("toggle")
+      ? toggleVisibility(true)
+      : toggleVisibility(false);
   }
   return (
     <header role="banner">
       <div className="toggle-btn-container">
-        <span
-          className="toggle-btn fas fa-bars"
-          tabidex="0"
+        <button
+          className="toggle-btn"
           onClick={toggleSideBar}
-          role="button"
-          aria-label="click here to hide or show search places list">
-        </span>
+          aria-label={isHidden ? "show search for places":"hide search for places"}>
+            <i className=" fas fa-bars"></i>
+        </button>
         </div>
-      <h1 className="page-header">Outdoor places in Alexandria, Egypt</h1>
+      <h1 className="page-header">Outdoor places in Cairo, Egypt</h1>
     </header>
   )
+}
+
+/* validate data types */
+Header.propTypes = {
+  toggleVisibility: PropTypes.func.isRequired,
+  isHidden: PropTypes.bool.isRequired
 }
 
 export default Header;

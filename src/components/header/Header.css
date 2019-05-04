@@ -12,15 +12,18 @@ header {
 }
 
 .toggle-btn {
-    font-size: 1.2rem;
+    background-color: #000;
     padding: 0.313em;
     cursor: pointer;
     color: #d00600;
     border: 0.04em solid #d00600;
     border-radius: 0.313em;
+    width: 2em;
+    height: 2em;
 }
 
-.toggle-btn:hover {
+.toggle-btn:hover,
+.toggle-btn:focus{
     background-color: #080808;
     color: #960400;
     border: 0.04em solid #960400;

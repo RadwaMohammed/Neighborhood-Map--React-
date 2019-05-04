@@ -2,7 +2,7 @@
 	text-align: center;
 	font-size: 0.9rem;
 	overflow: auto;
-	padding: 0.7em;
+	padding:0;
 }
 
 .result-container ul{
@@ -13,24 +13,26 @@
 }
 
 .place {
-	height: auto;
-    display: block;
-    margin: 0.7em;
-    cursor: pointer;
+    margin: 0.8em auto;
+	display: block;
     background-color: #222;
     color: #fff;
-    line-height: 3em;
-    padding: 0.2em;
+    border: none;
+    width: 90%;
+    height: 3em;
+    cursor: pointer;
 
 }
 
-.place:hover {
+.place:hover,
+.place:focus {
 	background-color: #000;
 	cursor: pointer;
+	color:#d00600;
 }
 
 .no-result {
-	color:#000;
+	color:#888;
 }
 
 

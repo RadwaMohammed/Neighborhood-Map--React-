@@ -10,6 +10,11 @@ footer{
 footer a {
 	color: #fff;
 }
+footer a:hover,
+footer a:focus {
+	color:#d00600;
+	cursor: pointer;
+}
 
 footer p {
 	margin: 0;

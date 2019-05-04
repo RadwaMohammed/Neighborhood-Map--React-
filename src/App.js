@@ -14,12 +14,17 @@ class App extends React.Component {
     locations : [],
     query:'',
     places: [],
-    markers:[]
+    markers:[],
+    isHidden:false // check side bar hidden or not for a11y
   }
 
   componentDidMount() {
     this.getLocations();
   }
+
+toggleVisibility =(visible)=>{
+  this.setState({isHidden:visible});
+}
 
   /* fetching data using axios which is a Promise based HTTP client for the browser and node.js
    * has features -Make (XMLHttpRequests) from the browser -Make (http) requests from node.js
@@ -34,7 +39,7 @@ class App extends React.Component {
       client_secret: 'J30MQOQUA425OIXPCFFZDDDZLE03KADG44AZCSL0B05AWQLP',
       section: 'outdoors',
       query: 'outdoors',
-      ll: '31.205753,29.924526',
+      ll: '30.06263, 31.24967',
       v: '20190429'
     };
 
@@ -57,8 +62,8 @@ class App extends React.Component {
   initMap = () => {
     // create map
     let map = new window.google.maps.Map(document.getElementById('map'), {
-      // location of Alexandria city in Egypt
-      center: {lat: 31.205753, lng: 29.924526},
+      // location of Cairo city in Egypt
+      center: {lat: 30.06263, lng:31.24967},
       zoom: 14
     });
     this.markers=[];
@@ -78,7 +83,7 @@ class App extends React.Component {
 
       /* content of each marker */
       let markerContent =
-        `<div aria-label="information window about ${location.venue.name}">
+        `<div aria-label="information window about ${location.venue.name}" tabIndex="0">
           <h3 class="info-header">${location.venue.name}</h2>
           <p class="info-detail">
             <span class="info-title">Address:</span>
@@ -112,6 +117,7 @@ class App extends React.Component {
         infowindow.setOptions({maxWidth:360});
         // open the infowindow
         infowindow.open(map, marker);
+
       });
 
       /* fix the problem when click on a marker and infowindow
@@ -203,10 +209,10 @@ class App extends React.Component {
 
 
   render() {
-    const{ locations, places, query} = this.state;
+    const{ locations, places, query, isHidden} = this.state;
     return (
       <div className="app">
-        <Header />
+        <Header isHidden={isHidden} toggleVisibility={this.toggleVisibility} />
         <main>
           <SideBar
             markers={this.state.markers}
@@ -214,6 +220,8 @@ class App extends React.Component {
             searchPlaces={this.searchPlaces}
             query={query}
             places={places}
+            isHidden={isHidden}
+            toggleVisibility={this.toggleVisibility}
             />
           <MyMap />
         </main>

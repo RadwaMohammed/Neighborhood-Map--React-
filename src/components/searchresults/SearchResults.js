@@ -3,7 +3,7 @@ import React from 'react';
 import './SearchResults.css';
 
 function SearchResults(props) {
-  const { locations, query, places, markers} = props;
+  const { locations, query, places, markers, isHidden, isInTabOrder} = props;
   const list = ( places.length > 0) ? places : locations;
   // add click event to marker tht it's name is clicked in the searched list
   function triggerMarker(placeName) {
@@ -24,20 +24,19 @@ function SearchResults(props) {
             </p>
           )
         :(
-          <ul tabidex="0">
+          <ul>
             { // display the list of searched places
               list.map((listItem, index) => {
                 return (
                   <li key={index}>
-                    <span
-                      role="button"
-                      tabidex="0"
+                    <button
+                      tabIndex={isInTabOrder(isHidden)}
                       className="place"
                       onClick={() => triggerMarker(listItem.venue.name)}
                       arial-label={`click to go to loction of ${listItem.venue.name}`}
                     >
                       {listItem.venue.name}
-                    </span>
+                    </button>
                   </li>
                 )
               })
@@ -54,7 +53,9 @@ SearchResults.propTypes = {
   locations: PropTypes.array.isRequired,
   places: PropTypes.array.isRequired,
   markers: PropTypes.array.isRequired,
-  query: PropTypes.string.isRequired
+  query: PropTypes.string.isRequired,
+  isHidden: PropTypes.bool.isRequired,
+  isInTabOrder: PropTypes.func.isRequired
 }
 
 export default SearchResults;

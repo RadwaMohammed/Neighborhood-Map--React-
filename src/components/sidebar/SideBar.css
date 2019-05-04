@@ -1,5 +1,5 @@
 aside {
-	width: 35%;
+	width: 42%;
     background-color: #fff;
     min-height: calc(100vh - 6.5em);
     transition: all 1s ease-in-out;
@@ -10,6 +10,7 @@ aside {
     border-bottom: 0.2em solid #d00600;
     border-top: 0.2em solid #d00600;
     height: calc(100vh - 6.5em);
+    color:#000;
 }
 
 .toggle{
@@ -42,7 +43,7 @@ aside {
 @media all and (max-width: 768px) and (min-width: 426px)   {
     aside {
         left: -1000px;
-        width: 65%;
+        width: 70%;
     }
 
     aside.toggle {

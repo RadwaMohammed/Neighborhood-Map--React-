@@ -4,20 +4,26 @@ import './SideBar.css';
 import SearchResults from '../searchresults/SearchResults';
 
 function SideBar(props) {
-  const{ locations, query, places, searchPlaces, markers } = props;
+  const{ locations, query, places, searchPlaces, markers, isHidden } = props;
+
+  function isInTabOrder(isHidden) {
+    let order = isHidden ? -1 : 0 ;
+    return order;
+  }
 
   return (
-    <aside>
-      <div className="search-container">
+    <aside aria-hidden={isHidden}>
+      <div className="search-container" >
         <h2 className="search-header">
           Search for an outdoor place
         </h2>
           <input
+            tabIndex={isInTabOrder(isHidden)}
             type="text"
             id="search"
             role="search"
             aria-label="Search for an outdoor place"
-            placeholder="Type here... "
+            placeholder="Search... "
             value={query}
             onChange={(event) => searchPlaces(event.target.value)}
           />
@@ -28,6 +34,8 @@ function SideBar(props) {
           query={query}
           locations={locations}
           markers={markers}
+          isHidden={isHidden}
+          isInTabOrder={isInTabOrder}
         />
       </div>
     </aside>
@@ -40,7 +48,8 @@ SideBar.propTypes = {
   places: PropTypes.array.isRequired,
   markers: PropTypes.array.isRequired,
   query: PropTypes.string.isRequired,
-  searchPlaces: PropTypes.func.isRequired
+  searchPlaces: PropTypes.func.isRequired,
+  isHidden: PropTypes.bool.isRequired
 }
 
 export default SideBar;
