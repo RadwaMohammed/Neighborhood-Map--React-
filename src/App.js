@@ -16,21 +16,67 @@ class App extends React.Component {
     places: [],
     markers:[]
   }
+
   componentDidMount() {
     this.getLocations();
   }
 
+  /* fetching data using axios which is a Promise based HTTP client for the browser and node.js
+   * has features -Make (XMLHttpRequests) from the browser -Make (http) requests from node.js
+   * https://github.com/axios/axios
+   *
+  */
+
+  getLocations = () => {
+    const endPoint = 'https://api.foursquare.com/v2/venues/explore?';
+    const parameters = {
+      client_id : 'TJ4M30ICUWSOT45033WN5QMJBBA0YUOD2RBTS1RW2H4LN24F',
+      client_secret: 'J30MQOQUA425OIXPCFFZDDDZLE03KADG44AZCSL0B05AWQLP',
+      section: 'outdoors',
+      query: 'outdoors',
+      ll: '31.205753,29.924526',
+      v: '20190429'
+    };
+
+    // fetching data
+    axios.get(endPoint + new URLSearchParams(parameters))
+    .then(response => {
+      this.setState({
+        locations: response.data.response.groups[0].items
+      }, this.loadMapScript());
+    })
+    .catch(error => {
+        // handle error of fetching data
+        alert('An error has occurred while fetching data of the places!');
+        console.log(`Error:  ${error}`);
+    });
+  }
+
+
   /* initialize google Map  */
   initMap = () => {
+    // create map
     let map = new window.google.maps.Map(document.getElementById('map'), {
       // location of Alexandria city in Egypt
       center: {lat: 31.205753, lng: 29.924526},
-      zoom: 15
+      zoom: 14
     });
     this.markers=[];
     // Create InfoWindow for mrkers
     let infowindow = new window.google.maps.InfoWindow();
     this.state.locations.forEach(location => {
+      /* create markers at loction of each venue*/
+      let marker = new window.google.maps.Marker({
+        position: {
+          lat: location.venue.location.lat,
+          lng: location.venue.location.lng
+        },
+        map: map,
+        title: location.venue.name,
+        animation: window.google.maps.Animation.DROP
+      });
+
+      /* content of each marker */
       let markerContent =
         `<div aria-label="information window about ${location.venue.name}">
           <h3 class="info-header">${location.venue.name}</h2>
@@ -47,26 +93,21 @@ class App extends React.Component {
             <span class="info-title"> lng:</span>
             ${location.venue.location.lng}
           </p>
-        </div>`;
+      </div>`;
 
-      let marker = new window.google.maps.Marker({
-        position: {
-          lat: location.venue.location.lat,
-          lng: location.venue.location.lng
-        },
-        map: map,
-        title: location.venue.name,
-        animation: window.google.maps.Animation.DROP
-      });
-
-      // add eeventlistener when click on a marker
+      /* add eventlistener when click on a marker
+       * it animate and open infowindow contain data about that location
+      */
       marker.addListener('click', function() {
         if (marker.getAnimation() !== null) {
           marker.setAnimation(null);
         } else {
           marker.setAnimation(window.google.maps.Animation.BOUNCE);
         }
-        setTimeout(()=>{marker.setAnimation(null)}, 700);
+        // to stop animation after short time
+        setTimeout(() => {marker.setAnimation(null)}, 700);
+        // Changes the center of the map to the clicked marker position
+        map.panTo(marker.position);
         // set the content of infowindow
         infowindow.setContent(markerContent);
         // set the maxWidth for infowindow
@@ -82,16 +123,19 @@ class App extends React.Component {
       marker.addListener('visible_changed', function() {
         infowindow.close();
       });
-
+      // finally push each marker to markers array
       this.markers.push(marker);
     });
+
+    // update the markers state
     this.setState({markers:this.markers});
+
     // global function to handle authentication errors for google map
     window.gm_authFailure = function() {
       alert('Google maps failed to load!');
     }
-
   }
+
 
   /* loading map script */
   loadMapScript = () => {
@@ -107,78 +151,46 @@ class App extends React.Component {
     script.onerror = function() {
       alert('Oh no, There is an error occurred during loading map!');
     };
+    // make script of map be first script in the page
     index.parentNode.insertBefore(script, index);
   }
 
-  /* fetching data using axios which is a Promise based HTTP client for the browser and node.js
-   * has features -Make (XMLHttpRequests) from the browser -Make (http) requests from node.js
-   * https://github.com/axios/axios
-   *
+
+  /*
+  * search places used to filter the places by its name
   */
-
-  getLocations = () => {
-    const endPoint = 'https://api.foursquare.com/v2/venues/explore?';
-    const parameters = {
-      client_id : 'TJ4M30ICUWSOT45033WN5QMJBBA0YUOD2RBTS1RW2H4LN24F',
-      client_secret: 'J30MQOQUA425OIXPCFFZDDDZLE03KADG44AZCSL0B05AWQLP',
-      section:'outdoors',
-      query:'outdoors',
-      ll: '31.205753,29.924526',
-      v: '20190429'
-
-    }
-    axios.get(endPoint + new URLSearchParams(parameters))
-    .then(response => {
-      this.setState({
-        locations: response.data.response.groups[0].items
-      }, this.loadMapScript());
-
-    })
-    .catch(error => {
-        // hande error of fetching data
-        alert('An error has occurred while fetching data of the places!');
-        console.log(`Error:  ${error}`);
-    });
-  }
-
-
-
-
   searchPlaces = (query) => {
-
     const allPlaces = this.state.locations;
     let searchedResults;
-    this.setState({ query: query }, ()=>{
+    this.setState({ query: query }, () => {
       if(query && query.length > 0) {
         const match = new RegExp(escapeRegExp(query), 'i')
         searchedResults = this.state.locations.filter(
           (location) => match.test(location.venue.name)
         );
-
+      // make the result markers visible and the remaining hidden
       this.markers.forEach(
           (marker) => {
             match.test(marker.title)
             ? marker.setVisible(true)
             : marker.setVisible(false);
           });
-
+        // update the state of places results of filtering
         this.setState({places: searchedResults});
       } else {
+        // if no place matches the search make all markers visible
         this.markers.forEach(
           (marker) => {
-
-            marker.setVisible(true)
-
+            marker.setVisible(true);
           });
         this.setState({places: allPlaces});
       }
-    })
+    });
   }
 
 
   render() {
-        const{ locations, places, query} = this.state;
-
+    const{ locations, places, query} = this.state;
     return (
       <div className="app">
         <Header />
@@ -196,6 +208,6 @@ class App extends React.Component {
       </div>
     )
   }
-
 }
+
 export default App;

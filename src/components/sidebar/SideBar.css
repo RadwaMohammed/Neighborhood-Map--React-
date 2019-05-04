@@ -1,5 +1,5 @@
 aside {
-	width: 42%;
+	width: 35%;
     background-color: #fff;
     min-height: calc(100vh - 6.5em);
     transition: all 1s ease-in-out;
@@ -22,7 +22,7 @@ aside {
 }
 
 .search-header {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	color: #d00600;
 }
 
@@ -42,7 +42,7 @@ aside {
 @media all and (max-width: 768px) and (min-width: 426px)   {
     aside {
         left: -1000px;
-        width: 71%;
+        width: 65%;
     }
 
     aside.toggle {
