@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types';
 import React from 'react';
 import './SideBar.css';
 import SearchResults from '../searchresults/SearchResults';
@@ -32,6 +32,15 @@ function SideBar(props) {
       </div>
     </aside>
   )
+}
+
+/* validate data types */
+SideBar.propTypes = {
+  locations: PropTypes.array.isRequired,
+  places: PropTypes.array.isRequired,
+  markers: PropTypes.array.isRequired,
+  query: PropTypes.string.isRequired,
+  searchPlaces: PropTypes.func.isRequired
 }
 
 export default SideBar;

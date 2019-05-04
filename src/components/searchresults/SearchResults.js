@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import './SearchResults.css';
 
@@ -48,6 +49,12 @@ function SearchResults(props) {
   )
 }
 
+/* validate data types */
+SearchResults.propTypes = {
+  locations: PropTypes.array.isRequired,
+  places: PropTypes.array.isRequired,
+  markers: PropTypes.array.isRequired,
+  query: PropTypes.string.isRequired
+}
+
 export default SearchResults;
-
-
