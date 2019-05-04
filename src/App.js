@@ -33,7 +33,7 @@ class App extends React.Component {
     this.state.locations.forEach(location => {
       let markerContent =
         `<div aria-label="information window about ${location.venue.name}">
-          <h2 class="info-header">${location.venue.name}</h2>
+          <h3 class="info-header">${location.venue.name}</h2>
           <p class="info-detail">
             <span class="info-title">Address:</span>
             ${location.venue.location.formattedAddress[0]} -
@@ -69,6 +69,8 @@ class App extends React.Component {
         setTimeout(()=>{marker.setAnimation(null)}, 700);
         // set the content of infowindow
         infowindow.setContent(markerContent);
+        // set the maxWidth for infowindow
+        infowindow.setOptions({maxWidth:360});
         // open the infowindow
         infowindow.open(map, marker);
       });
