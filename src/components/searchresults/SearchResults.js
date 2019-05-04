@@ -26,15 +26,15 @@ class SearchResults extends Component {
             <ul>
               {list.map((listItem, index) => {
                 return (
-                  <li
-                    role="button"
-                    key={index}
-                    className="place"
-                    onClick={() => this.triggerMarker(listItem.venue.name)}
-                    arial-label={`click to go to loction of ${listItem.venue.name}`}
-                  >
-                    {listItem.venue.name}
-
+                  <li key={index}>
+                    <span
+                      role="button"
+                      className="place"
+                      onClick={() => this.triggerMarker(listItem.venue.name)}
+                      arial-label={`click to go to loction of ${listItem.venue.name}`}
+                    >
+                      {listItem.venue.name}
+                    </span>
                   </li>
                 )
               }
