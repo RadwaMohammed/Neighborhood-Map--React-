@@ -1,68 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Neighborhood Map (React) Project
 
-## Available Scripts
+An application featuring a map of outdoor locations in Cairo, Egypt.
+Displays a marker for each location on the map, By clicking it, a pop-up window displays the Address. Also, let you filter places by their name.
 
-In the project directory, you can run:
+## Specifications
 
-### `npm start`
+The project is a single page map application using React, Google Maps API, and Foursquare API. The app is accessible, responsive and usable offline.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Instructions
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+In order to run the application follow these steps:
 
-### `npm test`
+### Development Mode
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-  Download or Clone the repository $ git clone `https://github.com/RadwaMohammed/Neighborhood-Map--React-.git`
+-  Navigate to the root directory of the project.
+-  Run `npm start` to installs the dependencies required for the project
+-  Run the app using `npm start`
+-  A new browser window automatically will open the app. If it doesn't, navigate to [http://localhost:3000/](http://localhost:3000/) in your browser
 
-### `npm run build`
+> If you are using yarn, use `yarn install` and `yarn start` instead of using npm!
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Production Mode
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+-  Run `npm run build` to create a production build.
+- Navigate to the build directory and start the server, for environments using Node, the easiest way is to install serve  `npm install -g serve`.
+- Run `serve -s build` will serve the project on the port 5000
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ > **Service Worker** : providing offline capabilities it works only in the *Production mode*
 
-### `npm run eject`
+## Dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [React](https://reactjs.org/)
+- [npm](https://www.npmjs.com/)
+- [prop-types](https://www.npmjs.com/package/prop-types)
+- [escape-string-regexp](https://www.npmjs.com/package/escape-string-regexp)
+- [axios](https://github.com/axios/axios)
+- [Google Map API](https://cloud.google.com/maps-platform/)
+- [Foursquare API](https://developer.foursquare.com/)
+- [Font Awesome](https://fontawesome.com/)
+- [Normalize.css](https://necolas.github.io/normalize.css/8.0.1/normalize.css)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contributing
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This repository is for a project in the Front-End Web Developer NanoDegree program at Udacity.
+Therefore, pull requests will not be accepted.
