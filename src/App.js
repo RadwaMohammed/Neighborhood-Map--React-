@@ -8,6 +8,8 @@ import MyMap from './components/mymap/MyMap';
 import SideBar from './components/sidebar/SideBar';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
+// handle error of react component
+import ErrorBoundary from './ErrorBoundary';
 
 class App extends React.Component {
   state = {
@@ -211,20 +213,22 @@ class App extends React.Component {
     const{ locations, places, query, isHidden} = this.state;
     return (
       <div className="app">
-        <Header isHidden={isHidden} toggleVisibility={this.toggleVisibility} />
-        <main>
-          <SideBar
-            markers={this.state.markers}
-            locations={locations}
-            searchPlaces={this.searchPlaces}
-            query={query}
-            places={places}
-            isHidden={isHidden}
-            toggleVisibility={this.toggleVisibility}
-            />
-          <MyMap />
-        </main>
-        <Footer />
+        <ErrorBoundary>
+          <Header isHidden={isHidden} toggleVisibility={this.toggleVisibility} />
+          <main>
+            <SideBar
+              markers={this.state.markers}
+              locations={locations}
+              searchPlaces={this.searchPlaces}
+              query={query}
+              places={places}
+              isHidden={isHidden}
+              toggleVisibility={this.toggleVisibility}
+              />
+            <MyMap />
+          </main>
+          <Footer />
+        </ErrorBoundary>
       </div>
     )
   }
