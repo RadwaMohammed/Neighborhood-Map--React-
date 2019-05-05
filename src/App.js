@@ -63,9 +63,10 @@ class App extends React.Component {
     let map = new window.google.maps.Map(document.getElementById('map'), {
       // location of Cairo city in Egypt
       center: {lat: 30.06263, lng:31.24967},
-      zoom: 14
+      zoom: 14,
+      mapTypeControl: false
     });
-    this.markers=[];
+    this.markers = [];
     // Create InfoWindow for mrkers
     let infowindow = new window.google.maps.InfoWindow();
     this.state.locations.forEach(location => {
@@ -112,11 +113,14 @@ class App extends React.Component {
         // set the content of infowindow
         infowindow.setContent(markerContent);
         // set the maxWidth for infowindow
-        infowindow.setOptions({maxWidth:360});
+        infowindow.setOptions({maxWidth: 360});
         // open the infowindow
         infowindow.open(map, marker);
-
-
+        /* focus the infowindow when it open*/
+        infowindow.addListener('domready', function() {
+          let infoItem = document.querySelector('.info');
+          infoItem.focus();
+        });
       });
 
       /* fix the problem when click on a marker and infowindow
@@ -131,11 +135,6 @@ class App extends React.Component {
       this.markers.push(marker);
     });
 
-    /* focus the infowindow when it open*/
-    infowindow.addListener('domready', function(){
-      let infoItem = document.querySelector('.info');
-      infoItem.focus();
-    });
 
     // update the markers state
     this.setState({markers:this.markers});
@@ -158,7 +157,7 @@ class App extends React.Component {
   /* get address of a place for the infowindow data
    * handle the issue of unavailable address in the data fetched from foursquare api
   */
-  getAddress=(place)=>{
+  getAddress=(place) => {
     let address = place.venue.location.address
     ? place.venue.location.address
     : 'Sorry, address is not available.';
@@ -204,13 +203,13 @@ class App extends React.Component {
 
 
   /* using for indicate sidebar is hidden or not for a11y */
-  toggleVisibility =(visible)=>{
+  toggleVisibility = (visible) => {
     this.setState({isHidden:visible});
   }
 
 
   render() {
-    const{ locations, places, query, isHidden} = this.state;
+    const { locations, places, query, isHidden} = this.state;
     return (
       <div className="app">
         <ErrorBoundary>
@@ -238,17 +237,17 @@ class App extends React.Component {
 // resource: https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
 function loadJS(src) {
   let index  = window.document.getElementsByTagName('script')[0];
-    // create script element for google map
-    let script = window.document.createElement('script');
-    script.src = src;
-    script.async = true;
-    script.defer = true;
-    // handle error on loading map
-    script.onerror = function() {
-      alert('Oh no, There is an error occurred during loading map!');
-    };
-    // make script of map be first script in the page
-    index.parentNode.insertBefore(script, index);
+  // create script element for google map
+  let script = window.document.createElement('script');
+  script.src = src;
+  script.async = true;
+  script.defer = true;
+  // handle error on loading map
+  script.onerror = function() {
+    alert('Oh no, There is an error occurred during loading map!');
+  };
+  // make script of map be first script in the page
+  index.parentNode.insertBefore(script, index);
 }
 
 export default App;
