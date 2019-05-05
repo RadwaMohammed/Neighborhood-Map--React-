@@ -24,16 +24,11 @@ class App extends React.Component {
   }
 
 
-toggleVisibility =(visible)=>{
-  this.setState({isHidden:visible});
-}
-
   /* fetching data using axios which is a Promise based HTTP client for the browser and node.js
    * has features -Make (XMLHttpRequests) from the browser -Make (http) requests from node.js
    * https://github.com/axios/axios
    *
   */
-
   getLocations = () => {
     const endPoint = 'https://api.foursquare.com/v2/venues/explore?';
     const parameters = {
@@ -85,20 +80,19 @@ toggleVisibility =(visible)=>{
 
       /* content of each marker */
       let markerContent =
-        `<div aria-label="information window about ${location.venue.name}" tabIndex="0">
+        `<div aria-label="information window about ${location.venue.name}" tabIndex="0" class="info">
           <h3 class="info-header">${location.venue.name}</h2>
-          <p class="info-detail">
+          <p class="info-detail" tabIndex="0">
             <span class="info-title">Address:</span>
             ${this.getAddress(location)}
           </p>
-          <p class="info-detail">
+          <p class="info-detail" tabIndex="0">
             <span class="info-title">lat:</span>
             ${location.venue.location.lat},
             <span class="info-title"> lng:</span>
             ${location.venue.location.lng}
           </p>
       </div>`;
-
 
       /* add eventlistener when click on a marker
        * it animate and open infowindow contain data about that location
@@ -120,6 +114,7 @@ toggleVisibility =(visible)=>{
         // open the infowindow
         infowindow.open(map, marker);
 
+
       });
 
       /* fix the problem when click on a marker and infowindow
@@ -129,16 +124,24 @@ toggleVisibility =(visible)=>{
       marker.addListener('visible_changed', function() {
         infowindow.close();
       });
+
+      /*window.google.maps.event.addListener(infowindow, 'domready', function(){
+
+       });*/
       // finally push each marker to markers array
       this.markers.push(marker);
     });
-
+    /* focus the infowindow when it open*/
+    infowindow.addListener('domready', function(){
+      let infoItem = document.querySelector('.info');
+      infoItem.focus();
+    });
     // update the markers state
     this.setState({markers:this.markers});
 
     // global function to handle authentication errors for google map
     window.gm_authFailure = function() {
-      alert('Google maps failed to load!');
+      alert('Google maps failed to load, Authentication Failed!');
     }
   }
 
@@ -209,6 +212,13 @@ toggleVisibility =(visible)=>{
       }
     });
   }
+
+
+  /* using for indicate sidebar is hidden or not for a11y */
+  toggleVisibility =(visible)=>{
+    this.setState({isHidden:visible});
+  }
+
 
   render() {
     const{ locations, places, query, isHidden} = this.state;
