@@ -1,6 +1,6 @@
 import escapeRegExp from 'escape-string-regexp';
 // Import axios
-import axios from 'axios'
+import axios from 'axios';
 import React from 'react';
 import './App.css';
 // import components
@@ -125,17 +125,16 @@ class App extends React.Component {
         infowindow.close();
       });
 
-      /*window.google.maps.event.addListener(infowindow, 'domready', function(){
-
-       });*/
       // finally push each marker to markers array
       this.markers.push(marker);
     });
+
     /* focus the infowindow when it open*/
     infowindow.addListener('domready', function(){
       let infoItem = document.querySelector('.info');
       infoItem.focus();
     });
+
     // update the markers state
     this.setState({markers:this.markers});
 
@@ -150,19 +149,7 @@ class App extends React.Component {
   loadMapScript = () => {
     window.initMap = this.initMap;
     // first script element in the document
-    let index  = window.document.getElementsByTagName('script')[0];
-    // create script element for google map
-    let script = window.document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA2I0qEtPwrjkRVQ8BiK_FjnoWwmC4ubOY&callback=initMap';
-    script.async = true;
-    script.defer = true;
-    // handle error on loading map
-    script.onerror = function() {
-      alert('Oh no, There is an error occurred during loading map!');
-    };
-    // make script of map be first script in the page
-    index.parentNode.insertBefore(script, index);
-
+    loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyA2I0qEtPwrjkRVQ8BiK_FjnoWwmC4ubOY&callback=initMap');
   }
 
 
@@ -241,6 +228,23 @@ class App extends React.Component {
       </div>
     )
   }
+}
+
+// Create the script tag for map integration
+// resource: https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
+function loadJS(src) {
+  let index  = window.document.getElementsByTagName('script')[0];
+    // create script element for google map
+    let script = window.document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.defer = true;
+    // handle error on loading map
+    script.onerror = function() {
+      alert('Oh no, There is an error occurred during loading map!');
+    };
+    // make script of map be first script in the page
+    index.parentNode.insertBefore(script, index);
 }
 
 export default App;
